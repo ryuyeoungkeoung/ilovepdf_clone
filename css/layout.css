@@ -1,0 +1,589 @@
+@charset "utf-8";
+/* html의 링크를 두 번 쓰는 것보단 이런식으로 서로를 연동 시켜주는게 좋다 ! */
+@import "reset.css";
+/* 폰트 설정 */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nanum+Gothic&display=swap");
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #47474f;
+}
+/* ----------------------------전체 큰 박스 */
+.wrapper {
+  width: 100%;
+  /*  높이 자식에 맞춰서 늘어나라 벗 지금 100-60만큼
+  보이기 때문에 헤더 적용값이 안 보일수 있음
+  잠깐 주석처리 해주면서 네비 수정하기! 값은 이거임! */
+  /* overflow: hidden; */
+}
+/* ------------------------헤더 */
+header {
+  width: 100%;
+  /* 사이트 높이 60이었음 */
+  height: 60px;
+  background-color: aliceblue;
+  /* 가로 세로 번지는정도 그림자색상 */
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.3);
+  /* 안에다가 공간 만들어줄거라서 박스사이징 넣어줌 */
+  box-sizing: border-box;
+  padding: 0 24px;
+  /* 고정하기만 해서 어디에 ?? 고정할지 좌표 입력 
+  앱솔과 픽스드는 절대라서 사방 값 입력이 가능함! */
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  /* 포지션이 다른 태그와 겹쳐 밑으로 깔리지 않게 위로 올려주는 값 입력 */
+  z-index: 999; /* 제일 높은 값임 */
+  /* 정렬!!!!!!!!!!!! */
+  display: flex;
+  column-gap: 24px;
+}
+h1 {
+  /* px를 안 넣는 이유는? 소수점이 나오기 때문에 이미지에 부모박스를 맞추기 위해 ! */
+  width: fit-content;
+  height: fit-content;
+  /*  로고를 중앙으로 옮겨줌 */
+  padding: 14px 0;
+}
+h1 img {
+  /* 세로만 맞춰줘서 사이트에 소수점이 나온거였음 ! */
+  height: 30px;
+}
+#gnb {
+  width: fit-content;
+  /* 헤더가 60px임 */
+  height: 100%;
+}
+#gnb > ul {
+  width: fit-content;
+  /* 1차 li를 가로로 위치하게 함 */
+  display: flex;
+  /* 세로 간격 조절 */
+  column-gap: 20px;
+  line-height: 60px;
+}
+/*-------------------- 1차 메뉴 */
+#gnb > ul > li {
+  padding: 0 20px;
+  /* 두번쨰 메뉴의 부모는 1차 메뉴의 li이다 그래서 
+  릴레이티브를 줌*/
+  position: relative;
+  text-align: center;
+}
+/* 작은 삼각형 */
+#gnb > ul > li .sm_3 {
+  display: inline-block;
+  /* 출력된 위치 즉 혼자 좌표값을 가지라고 */
+  position: relative;
+  top: -2px;
+  /* 블록속성을 갖고 있게 됐으니 마진값 넣어도 됨 레프트 대신 */
+  margin-left: 5px;
+  font-size: 9px;
+}
+#gnb > ul > li > a {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+}
+#gnb > ul > li:hover > a {
+  color: #bd060a;
+}
+/* ---------------------2차 메뉴 */
+#gnb > ul > li:nth-child(4) > div,
+#gnb > ul > li:last-child > div {
+  background-color: #ffffff;
+  /* 너무 좁아서 아이콘 땜에 물리적으로 넓이 넓혀줌 */
+  width: 160%;
+  /* 높이값이 안 보여야지 쇼료룍을 할 수 있음 근데 작업할때 그냥 크게 만듦*/
+  height: 0px;
+  overflow: hidden;
+  /*  부모에 이미 릴레이즈가 있어서 옆으로 옮겨야하니 */
+  position: absolute;
+  left: -50px;
+  top: 70px;
+
+  /* box-sizing: border-box; /* 여기 div에 패딩 넣지 않는다 나중에 숨겨지지 않기 떄문에 
+  그래서 li에 넣어줄거임  혹시나 패딩 영역이 나올까봐 넣는거임 일단 주석처리*/
+
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.submenu {
+  box-sizing: border-box;
+  /* 넓이 총 160% */
+  width: 100%;
+  padding: 10px 30px;
+  text-align: left;
+  /* 1차 메뉴li 라인하이트가 60이어서 줄여줌 */
+  line-height: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.submenu > span {
+  color: #707078;
+}
+.submenu > li {
+  box-sizing: border-box;
+  padding-left: 40px;
+  /* 혼자 값을 가져라 */
+  position: relative;
+  border-radius: 8px;
+}
+.submenu > li:hover {
+  background-color: #f5f5f5;
+}
+/* a태그 앞에 아이콘 영역 공통설정 */
+.submenu > li > a::before {
+  /* 가상요소는 전부 인라인 속성 그래서 블록 */
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  /* 가상요소는 무조건 컨텐츠를 넣어야함 ! */
+  content: "icon";
+  font-size: 0;
+  /*  옮기게 되면 박스가 위로 올라오고 텍스트는 밑으로 내려감 박스 블록 텍스트인라인이니까 ! 그래서 
+  아까 부모에 릴레이지를 넣어줌 여기에 자식 포지션!*/
+  position: absolute;
+  top: 15px;
+  /* 박스 안에서도 좀 떨어지게 조정해줌10px */
+  left: 10px;
+  /* 공통적으로 이미지 갖고오기 나중에 클래스 준거에 이름지정따로 하면 됨 */
+  /* 백그라운드는 전체값을 입력해준다 색상(우린 나중에 지워줬음) url 반복여부 */
+  background: url(../img/sprite.svg) no-repeat;
+  /* 불러오면 이미지가 살짝 엇나가있기때문에 조금이라도 중간으로 옮겨줌 */
+  background-position-x: -5px;
+}
+/* 한개씩 불러오기 */
+.submenu > li > a.jpg::before {
+  background-position-y: -180px;
+}
+.submenu > li > a.word::before {
+  background-position-y: -205px;
+}
+.submenu > li > a.power::before {
+  background-position-y: -230px;
+}
+.submenu > li > a.excel::before {
+  background-position-y: -255px;
+}
+.submenu > li > a.htmls::before {
+  background-position-y: -530px;
+}
+/* 서브메뉴 안에 li에 호버하면 a가 바껴라  */
+.submenu > li:hover a {
+  color: #bd060a;
+}
+#gnb > ul > li:nth-child(4):hover > div {
+  /* 사이트 크기 320px */
+  height: 320px;
+}
+#gnb > ul > li:last-child:hover > div {
+  height: 370px;
+}
+/* 2번째 차 메뉴 아ㅣ콘 */
+.submenu > li > a.marge::before {
+  background-position-y: -5px;
+}
+.submenu > li > a.split::before {
+  background-position-y: -30px;
+}
+.submenu > li > a.remove::before {
+  background-position-y: -55px;
+}
+.submenu > li > a.extract::before {
+  background-position-y: -80px;
+}
+.submenu > li > a.oranzie::before {
+  background-position-y: -105px;
+}
+.submenu > li > a.scan::before {
+  background-position-y: -680px;
+}
+/* 오른쪽 아이콘 버튼들 */
+.action {
+  width: fit-content;
+  /* 위에 60px만큼 */
+  height: 100%;
+  align-items: center;
+
+  /* 부모박스가 플랙스가 적용된 박스에서 
+  만약 해당 요소만 끝으로 옮겨줌 - 마진을 준다!!!!!! */
+  margin-left: auto;
+  /* 브라우저를 올렸을때 밑에 문구가 뜨게 하기 위해서 
+  기준점 잡아주려고 포지션 값 줌 */
+
+  gap: 5px;
+  display: flex;
+}
+/*  */
+/* a태그에 하는 이유가 사용자의 편의를 위해서 한 거임
+그 부분만 클릭하지 않아도 주변만 클릭해도 넘어갈 수 있도록 하기 위해서  */
+.action > a {
+  /* 넓이 높이를 갖게 하려고 블록 바꿈  */
+  display: block;
+  width: 60px;
+  height: 100%;
+  /* 브라우저를 올렸을때 밑에 문구가 뜨게 하기 위해서 
+  기준점 잡아주려고 포지션 값 줌 부모박스가 된다고 생각하면 됨 */
+  position: relative;
+  /* 버튼이 있어서 만들어주려면 패딩에 색 넣고 근데 
+  안쪽으로 들어오게 만드렁야해서( a부분도 클릭했을때 넘어가야해서 박스사이징에 패딩값   */
+  box-sizing: border-box;
+}
+
+.action > a::before {
+  content: "";
+  display: block;
+  background-image: url(../img/sprite.svg);
+  background-repeat: no-repeat;
+  /* 넓이 높이가 없어서 따로 정해서 해줄거임 그럼 화면에 보임 */
+}
+.action > a.icon_desk {
+  /* 위에 a태그 안에 박스사이징 넣어줬으니까 모니터 아이콘을 가운데로
+    몰려고 여긴 패딩값만 준다 */
+  padding: 16px 14px;
+}
+.action > a.icon_desk::before {
+  width: 32px;
+  height: 28px;
+  background-position: -55px -30px;
+}
+.action > a.icon_desk::after {
+  content: "ilovepdf desktop. work offline";
+  display: block;
+  font-size: 14px;
+  width: 230px;
+  min-height: 32px;
+  background-color: #474747;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  position: absolute;
+  top: 70px;
+  left: -70px;
+  border-radius: 8px;
+  /* 0.3초 동안 오퍼시티를 나타낸다  */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+/* 오른쪽 메뉴 오퍼시티 */
+.action > a.icon_desk:hover::after {
+  opacity: 1;
+}
+.action > a.login {
+  text-align: center;
+  line-height: 60px;
+  color: #bd060a;
+  font-weight: 500;
+}
+.action > a.login:hover {
+  color: #47474f;
+}
+.action > a.sign_up {
+  /* 버튼 사이즈를 키워야하니까 보더 박스 해제하고
+  밖으로 생기는 패딩을 만들어줌 */
+  box-sizing: content-box;
+  text-align: center;
+  /* 사이즈조절 */
+  height: 35px;
+  padding: 0 12px;
+  /* 세로 가운데로 조절 */
+  line-height: 35px;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #bd060a;
+  color: #ffffff;
+  border-radius: 10px;
+  /* 트랜지션은 호버 이전의 초기 모습에 주는것이다. */
+  transition: 0.3s;
+}
+.action > a.sign_up:hover {
+  background-color: #47474f;
+}
+.action > a.menu::before {
+  width: 24px;
+  height: 18px;
+  background-position: -55px -5px;
+}
+.action > a.menu {
+  padding: 21px 18px;
+}
+/* -------------------------컨텐츠 영역1 */
+main {
+  margin-top: 60px;
+  width: 100%;
+  height: auto;
+  /* 색상 url 반복여부 배경고정여부 위치 /사이즈) */
+  background: #f5f5fa url(../img/background.svg) no-repeat fixed center / cover;
+}
+section {
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+}
+.tools {
+  /* 헤더 높이만큼 내려와라 헤더가 고정 되어있으므로
+  그만큼 내용이 숨어서 안 보임 그래서 헤더의 높이만큼 
+  내려와야지 볼 수 있다. */
+  margin-top: 60px;
+  /* 마진만큼 내려주고 패딩은 박스사이징 해줬으니까 메인에서
+  보이는 영역만큼 내려줌 */
+  padding-top: 50px 0;
+  text-align: center;
+}
+.top_title {
+  width: 100%;
+  margin-bottom: 40px;
+  padding-top: 40px;
+}
+.top_title h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+.top_title p {
+  font-size: 22px;
+}
+.tools_wrap {
+  /* 위에 박스사이징을 해놓은 상태이기 때문에 패딩을 주면 안쪽으로 드렁옴 */
+  padding: 0 68px;
+  /*  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+}
+.item_con {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-flow: row wrap;
+  /* 사방으로 2px gap */
+  gap: 2px;
+  flex: 1 0 16%;
+}
+.item_con > .item {
+  /*!!!!!!! 박스들의 기본 사이즈를 정해주는 속성임 !!!!!! */
+  /* flex-basis: calc(16.666% - 4px);아래와 동일한 효과 */
+  flex: 1 0 16%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #f5f5fa;
+  text-align: left;
+  border-radius: 4px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+.item > a {
+  display: block;
+  /* 마우스를 올렸을때 전체영역이 클릭되어야해서 100에 100 */
+  width: 100%;
+  height: 100%;
+  padding: 50px 30px;
+  /* 깨진 글자 뿌시기 */
+  word-wrap: break-word;
+  /* 패딩이 밖으로 나가면 글자가 깨지기 때문에 안으로 넣어줌 */
+  box-sizing: border-box;
+}
+.item > a:hover {
+  background-color: #f5f5fa;
+}
+.item h3 {
+  font-size: 20px;
+  color: #333;
+  font-weight: 700;
+}
+.item h3::before {
+  content: "icons";
+  font-size: 0;
+  /* 인라인 속성이라 기본  속성 변경해서 넓이 높이 값주기 */
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 30px;
+  background: url(../img/sprite.svg) no-repeat;
+  background-size: 545%;
+  background-position: -11px -11px;
+}
+.item p {
+  font-size: 13px;
+  line-height: 18px;
+  color: #707078;
+  margin-top: 10px;
+}
+/* --------------------------------두번째 섹션 */
+.solution {
+  background-color: #ffffff;
+  padding: 100px 0;
+  color: #33333b;
+  text-align: center;
+}
+section h2 {
+  font-size: 42px;
+  font-weight: 700;
+}
+section > p {
+  line-height: 32px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #47474f;
+}
+.solution_box {
+  width: 1500px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  column-gap: 40px;
+  text-align: left;
+}
+.solution_box h3 {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.solution_box p {
+  color: #707078;
+  line-height: 28px;
+  font-weight: 400;
+}
+.solution_box p > a {
+  text-decoration: underline;
+  color: #ff1014;
+  font-weight: 600;
+}
+/* -----------------------세번째 섹션 */
+.user {
+  padding: 100px 0;
+  text-align: center;
+}
+.user p {
+  margin-top: 28px;
+  color: #707078;
+}
+.other_logo {
+  width: 500px;
+
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+.other_logo > div {
+  /* 높이로 맞춰주려고 높이값만 줌 */
+  height: 30px;
+}
+.other_logo > div > img {
+  /* 위에 높이값에 맞추기 위해 맥스하이트 - 반응형 하기 좋음 */
+  max-height: 100%;
+}
+/* ----------------------마지막섹션 */
+.premium {
+  background-color: #47474f;
+  color: #f5f5fa;
+  display: flex;
+  justify-content: space-between;
+  /* 위에 모든 섹션에 보더박스각 들어와있음 */
+  padding: 80px 200px;
+  /* 세로 중앙으로 모아줌 */
+  align-items: center;
+}
+.left {
+  width: 60%;
+}
+.left h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+.left p {
+  line-height: 32px;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 60px;
+}
+.left a {
+  /* a는 인라인이라서 블록속성으로 바꿔야지만 
+  패딩을넣어줄 수 있다. */
+  display: block;
+  background-color: gold;
+  width: fit-content; /* 현재 들어가있는 글자크기로 맞춰라  */
+  font-weight: 700;
+  padding: 8px 24px;
+  border-radius: 8px;
+  /* 샤ㅑ라락 */
+  transition: 0.3s;
+}
+.left a:hover {
+  background-color: rgb(178, 159, 55);
+}
+/* 풋터 */
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 50px 200px;
+  background-color: #f5f5fa;
+}
+.sitemap {
+  width: 100%;
+  border-bottom: 1px solid #aaa;
+  height: fit-content;
+  margin-bottom: 30px;
+}
+.sitemap #footer_nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+}
+.sitemap #footer_nav ul {
+  /* width: 25%; */
+  /* 이렇게 해줘도 되고, 1000의 ul이 4개니까  */
+  flex-basis: 25%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex: 1 1 25%;
+  line-height: 1;
+  font-weight: 400;
+}
+.sitemap #footer_nav ul h4 {
+  color: #ff1014;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.sitemap #footer_nav ul li {
+  margin-bottom: 14px;
+}
+
+.sitemap #footer_nav a {
+  color: #707078;
+}
+.sitemap #footer_nav a:hover {
+  color: #ff1014;
+}
+.btn_wrap {
+  width: 100%;
+  height: 40px;
+  margin: 30px 0;
+
+  /* 정렬 이거 아님 플롯 사용해도 됨 !  */
+}
+/* a태그는 블록속성이여야지만 마진 패딩을 가질 수 있음
+근데 블록만 넣게 되면 구조가 무너지니 두개 다 갖고 있는 
+인라인 블록 사용 */
+.btn_wrap a {
+  float: right;
+  display: inline-block;
+  width: 135px;
+  height: 40px;
+  margin-left: 10px;
+}
+/* 위에 플롯 써서 뒤에껄 갖고와서 마진 레프트 사용해줌 */
+.btn_wrap a:last-child {
+  margin-left: 0;
+}
