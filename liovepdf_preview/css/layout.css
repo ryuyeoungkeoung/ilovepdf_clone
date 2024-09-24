@@ -1,0 +1,497 @@
+@charset "utf-8";
+@import "reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #47474f;
+}
+.wrapper {
+  width: 100%;
+  /* overflow: hidden; */
+  height: auto; /*오버플로우히든하면 만들때 아래 영역이 잠시 안보여서 하이트 오토 해둠*/
+}
+header {
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box; /*패딩으로 해더 양 옆 여백을 만들어주기 위해 박스 사이징 진행 패딩이 안으로 생겨야하니깐*/
+  padding: 0 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; /*브라우저 줄였을때 확실하게 잘 고정되어있었음해서 right도 고정시킴*/
+  z-index: 999;
+  display: flex;
+  column-gap: 24px;
+}
+h1 {
+  width: fit-content;
+  height: fit-content; /*이미지 크기만큼 크기를 잡아라 max-width쓰는게 아니라 이미지에 부모박스를 맞추는 방법*/
+  padding: 15px 0;
+}
+h1 img {
+  height: 30px;
+}
+#gnb {
+  width: fit-content;
+  height: 100%;
+}
+#gnb > ul {
+  width: fit-content;
+  display: flex;
+  column-gap: 20px;
+  line-height: 60px; /*라인하이트로 가운데정렬해줌*/
+}
+/* 1차메뉴 */
+#gnb > ul > li {
+  padding: 0 20px; /*상하 좌우*/
+  position: relative;
+  text-align: center;
+}
+#gnb > ul > li .sm_3 {
+  display: inline-block; /*span태그는 원래 iline 속성이라 인라인 블럭으로 바꿔준다*/
+  position: relative; /*폰트사이즈로 크기를 줄이고 위치값을 맞춰주기위해*/
+  font-size: 9px;
+  top: -2px;
+  margin-left: 5px;
+}
+#gnb > ul > li > a {
+  font-size: 14px;
+  font-weight: 700;
+}
+#gnb > ul > li:hover > a {
+  color: #e5322d;
+}
+/* 2차메뉴 */
+/* 한꺼번에 선언 */
+#gnb > ul > li:nth-child(4) > div,
+#gnb > ul > li:last-child > div {
+  background-color: #fff;
+  width: 160%; /*li의 160% 차지해라*/
+  height: 0px;
+  overflow: hidden; /*높이를0으로 만들어서 오버플로우로 숨김*/
+  position: absolute;
+  left: -56px;
+  top: 70px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  transition: 0.3s; /*스르륵 펼쳐지는 효과 0.3초*/
+}
+.submenu {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 30px; /*상하 좌우*/
+  text-align: left; /*글자 왼쪽 정렬*/
+  line-height: 50px; /*높이값을 라인하이트로 줄였다.*/
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase; /*대문자로 변경*/
+}
+.submenu > span {
+  color: #707078;
+}
+.submenu > li {
+  box-sizing: border-box;
+  padding-left: 30px; /*li 앞에 아이콘을 넣어줄 여백을 만들어줬다 아이콘 크기20+여백 20*/
+  position: relative; /*앞에 오는 아이콘들을 정렬하기위해 상대좌표로 변경*/
+  border-radius: 8px;
+}
+.submenu > li:hover {
+  background-color: #f5f5f5;
+}
+/* a태그 앞에 아이콘 영역 공통 설정 */
+.submenu > li > a::before {
+  display: block; /*가상요소 선택자는 인라인 속성이라 속성 바꿔줘야한다.*/
+  width: 20px;
+  height: 20px;
+  content: ""; /*content를 반드시 넣어줘야한다 안넣으면 안나옴 ''안은 비워둬도 된다. 만약 문구를 쓸 경우 폰트 사이즈를 0으로 선언해줘야한다*/
+  position: absolute;
+  left: 0px;
+  top: 15px; /*좌표값으로 아이콘 위치를 li 옆으로 맞춰준다*/
+  background:/* lightblue*/ url(./../img/sprite.svg) no-repeat; /*한꺼번에 선언 배경컬러, 배경주소, 반복여부 위치맞출때 배경컬러 사용했다.*/
+  background-position-x: -5px;
+}
+/* a안에 클래스 땡땡을 불러와라 */
+.submenu > li > a.jpg::before {
+  background-position-y: -180px;
+}
+.submenu > li > a.word::before {
+  background-position-y: -205px;
+}
+.submenu > li > a.power::before {
+  background-position-y: -230px;
+}
+.submenu > li > a.excel::before {
+  background-position-y: -255px;
+}
+.submenu > li > a.htmls::before {
+  background-position-y: -530px;
+}
+.submenu > li > a.merge::before {
+  background-position-y: -5px;
+}
+.submenu > li > a.split::before {
+  background-position-y: -30px;
+}
+.submenu > li > a.remove::before {
+  background-position-y: -55px;
+}
+.submenu > li > a.extract::before {
+  background-position-y: -80px;
+}
+.submenu > li > a.organize::before {
+  background-position-y: -105px;
+}
+.submenu > li > a.scan::before {
+  background-position-y: -680px;
+}
+
+.submenu > li:hover > a {
+  color: #e5322d;
+}
+/* 서브메뉴 펼쳐짐 */
+#gnb > ul > li:nth-child(4):hover > div {
+  height: 320px;
+}
+#gnb > ul > li:last-child:hover > div {
+  height: 370px;
+}
+/* 오른쪽 아이콘 */
+.action {
+  width: fit-content;
+  height: 100%;
+  margin-left: auto; /*margin을 auto로 두면 왼쪽 끝으로 가게된다. 오른쪽으로 가게 하고 싶으면 margin right를 auto로 주면 된다*/
+  column-gap: 5px;
+  display: flex;
+  align-items: center;
+}
+.action > a {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 100%;
+  box-sizing: border-box; /*버튼만들때 필요하니깐 미리 선언*/
+  /* background-color: beige; */
+}
+/* 각각 불러오기 힘들어서 a로 전체 비포 만들어놓고 가상요소 들어갈 부분만 넓이높이 줘서 보여지게 한다.*/
+.action > a::before {
+  content: "";
+  display: block;
+  /* background-color: lightsalmon; */
+  background-image: url(./../img/sprite.svg);
+  background-repeat: no-repeat;
+}
+.action > a.icon_desk {
+  padding: 16px 14px;
+}
+.action > a.icon_desk::before {
+  width: 32px;
+  height: 28px;
+  background-position: -55px -30px;
+}
+.action > a.icon_desk::after {
+  content: "iLovePDF Desktop, work offline";
+  display: block; /*인라인블럭은 보더라디우스를 쓸 수 없다 그래서 블럭으로 바꿈*/
+  font-size: 14px;
+  width: 230px;
+  line-height: 32px;
+  background-color: #47474f;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  position: absolute;
+  top: 70px;
+  left: -70px;
+  border-radius: 8px;
+  opacity: 0; /*투명도를 없애서 숨겨준다*/
+  transition: opacity 0.3s; /*0.3초동안 오퍼시티를 변화시켜라*/
+}
+/* 띄어쓰기 없이 에프터 불러와야함. 아이콘에 호버하면 뒤에 에프터를 */
+.action > a.icon_desk:hover::after {
+  opacity: 1;
+}
+.action > a.login {
+  text-align: center;
+  line-height: 60px;
+  color: #e5322d;
+  font-weight: 500;
+}
+.action > a.login:hover {
+  color: #47474f;
+}
+.action > a.sign_up {
+  box-sizing: content-box; /*border-box의 반대.해제 버튼 만들어주기위해서*/
+  text-align: center;
+  height: 32px;
+  line-height: 30px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #e5322d;
+  color: #fff;
+  border-radius: 10px;
+  transition: 0.3s; /*hover했을때 천천히 바뀌게 할려면 hover에 이 효과를 주는게 아니라 원래 얘한테 줘야한다*/
+}
+.action > a.sign_up:hover {
+  background-color: #47474f;
+}
+.action > a.menu {
+  padding: 21px 18px;
+}
+.action > a.menu::before {
+  width: 24px;
+  height: 18px;
+  background-position: -55px -5px;
+}
+/* 컨텐츠 영역 */
+main {
+  width: 100%;
+  height: auto; /*나중에 오버플로우 히든으로 바꿀거다*/
+  /*색상 이미지경로 반복여부 배경고정 위치 / 사이즈 순서*/
+  background: #f5f5fa url(./../img/background.svg) no-repeat fixed center /
+    cover;
+  margin-top: 60px; /*해더크기만큼 내려줘야 컨텐츠 애들이 안숨는다*/
+}
+/* 모든 섹션에 공통 속성 */
+section {
+  width: 100%;
+  box-sizing: border-box; /*섹션들 영역을 패딩으로 잡을려고*/
+  height: auto;
+}
+/* 섹션1 */
+.tools {
+  padding: 50px 0;
+  text-align: center;
+}
+.top_title {
+  width: 100%;
+  margin-bottom: 40px; /*밑에 박스들하고 벌려준다*/
+}
+.top_title h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.top_title p {
+  font-size: 20px;
+}
+.tools_wrap {
+  padding: 0 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item_con {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2px;
+}
+.item_con .item {
+  /* flex-basis: calc(16.666% - 4px); gap만큼 빼줌 */
+  flex: 1 0 16%; /*기본적으로 가져야할 넓이를 16%로 설정*/
+  word-wrap: break-word; /*튀어나온거 정렬*/
+  background-color: #fff;
+  border: 1px solid #f5f5fa;
+  text-align: left;
+  border-radius: 4px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+/* calc() = 계산기 숫자값을 계산해서 알아서 계산해줌*/
+.item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 50px 30px;
+  box-sizing: border-box;
+}
+.item a:hover {
+  background-color: #f5f5fa;
+}
+.item h3 {
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+}
+.item h3::before {
+  content: "icons";
+  font-size: 0;
+  display: block;
+  width: 48px;
+  height: 48px;
+  /* background-color: lightblue; */
+  margin-bottom: 30px;
+  background: url(./../img/sprite.svg) no-repeat;
+  background-size: 545%;
+  background-position: -11px -11px;
+}
+.item p {
+  font-size: 13px;
+  line-height: 18px;
+  color: #707078;
+  margin-top: 10px;
+}
+/* 섹션2 */
+.solution {
+  background-color: #fff;
+  padding: 100px 0;
+  color: #33333b;
+  text-align: center;
+}
+section > h2 {
+  font-size: 42px;
+  font-weight: 700;
+}
+section > p {
+  /*전체 p 공통속성 선언*/
+  line-height: 32px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #47474f;
+}
+.solution_box {
+  width: 1500px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  column-gap: 40px;
+  text-align: left;
+}
+.solution_box h3 {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.solution_box p {
+  color: #707078;
+  line-height: 28px;
+  font-weight: 400;
+}
+.solution_box a {
+  text-decoration: underline;
+  color: #e5322d;
+  font-weight: 600;
+}
+.solution_box a:hover {
+  color: #47474f;
+}
+/* 섹션3 */
+.user {
+  padding: 100px 0;
+  text-align: center;
+}
+.user p {
+  margin-top: 28px;
+  color: #707078;
+}
+.other_logo {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+.other_logo > div {
+  height: 30px;
+}
+.other_logo > div > img {
+  max-height: 100%; /*부모박스의 높이에 맞춰서 채워라*/
+}
+/* 섹션4 */
+.premium {
+  background-color: #47474f;
+  color: #f5f5fa;
+  display: flex;
+  justify-content: space-between;
+  padding: 80px 200px;
+  align-items: center; /*글과 그림 센터로 정렬*/
+}
+.left {
+  width: 60%;
+}
+.left h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+.left p {
+  line-height: 32px;
+  font-weight: 22px;
+  font-weight: 400;
+  margin-bottom: 60px;
+}
+.left a {
+  display: block;
+  background-color: gold;
+  width: fit-content;
+  padding: 8px 24px;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.left a:hover {
+  background-color: goldenrod;
+}
+/* 푸터 */
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 50px 200px;
+  background-color: #f5f5fa;
+}
+.sitemap {
+  width: 100%; /*푸터의 패딩영역을 제외한 나머지 영역을 100%*/
+  height: fit-content;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 30px;
+}
+#footer_nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px; /*반응형을 고려하여 갭 넣어놓음*/
+}
+#footer_nav ul {
+  /* flex-basis: 25%;
+  flex-grow: 1;
+  flex-shrink: 1; */
+  flex: 1 25%;
+  line-height: 1;
+  font-weight: 400;
+}
+#footer_nav ul h4 {
+  color: #e5322d;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+#footer_nav ul li {
+  margin-bottom: 14px; /*line-height말고 마진으로 간격을 벌려줬다*/
+}
+#footer_nav ul li a {
+  color: #707078;
+}
+#footer_nav ul li a:hover {
+  color: #e5322d;
+}
+.btn_wrap {
+  width: 100%;
+  height: 40px; /*버튼 높이가 40이라서*/
+  margin: 30px 0;
+}
+.btn_wrap a {
+  float: right;
+  display: block;
+  width: 135px;
+  height: 40px;
+  margin-left: 10px;
+}
+.btn_wrap:first-child {
+  margin-left: 0; /*반응형을 고려해서 없애준다*/
+}
