@@ -1,8 +1,6 @@
 @charset "utf-8";
-/* html의 링크를 두 번 쓰는 것보단 이런식으로 서로를 연동 시켜주는게 좋다 ! */
 @import "reset.css";
-/* 폰트 설정 */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nanum+Gothic&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 body {
   font-family: "Inter", sans-serif;
   font-size: 16px;
@@ -10,157 +8,115 @@ body {
   font-weight: 400;
   color: #47474f;
 }
-/* ----------------------------전체 큰 박스 */
 .wrapper {
   width: 100%;
-  /*  높이 자식에 맞춰서 늘어나라 벗 지금 100-60만큼
-  보이기 때문에 헤더 적용값이 안 보일수 있음
-  잠깐 주석처리 해주면서 네비 수정하기! 값은 이거임! */
   /* overflow: hidden; */
+  height: auto; /*오버플로우히든하면 만들때 아래 영역이 잠시 안보여서 하이트 오토 해둠*/
 }
-/* ------------------------헤더 */
 header {
   width: 100%;
-  /* 사이트 높이 60이었음 */
   height: 60px;
-  background-color: aliceblue;
-  /* 가로 세로 번지는정도 그림자색상 */
+  background-color: #fff;
   box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.3);
-  /* 안에다가 공간 만들어줄거라서 박스사이징 넣어줌 */
-  box-sizing: border-box;
+  box-sizing: border-box; /*패딩으로 해더 양 옆 여백을 만들어주기 위해 박스 사이징 진행 패딩이 안으로 생겨야하니깐*/
   padding: 0 24px;
-  /* 고정하기만 해서 어디에 ?? 고정할지 좌표 입력 
-  앱솔과 픽스드는 절대라서 사방 값 입력이 가능함! */
   position: fixed;
-  left: 0;
   top: 0;
-  right: 0;
-  /* 포지션이 다른 태그와 겹쳐 밑으로 깔리지 않게 위로 올려주는 값 입력 */
-  z-index: 999; /* 제일 높은 값임 */
-  /* 정렬!!!!!!!!!!!! */
+  left: 0;
+  right: 0; /*브라우저 줄였을때 확실하게 잘 고정되어있었음해서 right도 고정시킴*/
+  z-index: 999;
   display: flex;
   column-gap: 24px;
 }
 h1 {
-  /* px를 안 넣는 이유는? 소수점이 나오기 때문에 이미지에 부모박스를 맞추기 위해 ! */
   width: fit-content;
-  height: fit-content;
-  /*  로고를 중앙으로 옮겨줌 */
-  padding: 14px 0;
+  height: fit-content; /*이미지 크기만큼 크기를 잡아라 max-width쓰는게 아니라 이미지에 부모박스를 맞추는 방법*/
+  padding: 15px 0;
 }
 h1 img {
-  /* 세로만 맞춰줘서 사이트에 소수점이 나온거였음 ! */
   height: 30px;
 }
 #gnb {
   width: fit-content;
-  /* 헤더가 60px임 */
   height: 100%;
 }
 #gnb > ul {
   width: fit-content;
-  /* 1차 li를 가로로 위치하게 함 */
   display: flex;
-  /* 세로 간격 조절 */
   column-gap: 20px;
-  line-height: 60px;
+  line-height: 60px; /*라인하이트로 가운데정렬해줌*/
 }
-/*-------------------- 1차 메뉴 */
+/* 1차메뉴 */
 #gnb > ul > li {
-  padding: 0 20px;
-  /* 두번쨰 메뉴의 부모는 1차 메뉴의 li이다 그래서 
-  릴레이티브를 줌*/
+  padding: 0 20px; /*상하 좌우*/
   position: relative;
   text-align: center;
 }
-/* 작은 삼각형 */
 #gnb > ul > li .sm_3 {
-  display: inline-block;
-  /* 출력된 위치 즉 혼자 좌표값을 가지라고 */
-  position: relative;
-  top: -2px;
-  /* 블록속성을 갖고 있게 됐으니 마진값 넣어도 됨 레프트 대신 */
-  margin-left: 5px;
+  display: inline-block; /*span태그는 원래 iline 속성이라 인라인 블럭으로 바꿔준다*/
+  position: relative; /*폰트사이즈로 크기를 줄이고 위치값을 맞춰주기위해*/
   font-size: 9px;
+  top: -2px;
+  margin-left: 5px;
 }
 #gnb > ul > li > a {
-  text-transform: uppercase;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 }
 #gnb > ul > li:hover > a {
-  color: #bd060a;
+  color: #e5322d;
 }
-/* ---------------------2차 메뉴 */
+/* 2차메뉴 */
+/* 한꺼번에 선언 */
 #gnb > ul > li:nth-child(4) > div,
 #gnb > ul > li:last-child > div {
-  background-color: #ffffff;
-  /* 너무 좁아서 아이콘 땜에 물리적으로 넓이 넓혀줌 */
-  width: 160%;
-  /* 높이값이 안 보여야지 쇼료룍을 할 수 있음 근데 작업할때 그냥 크게 만듦*/
+  background-color: #fff;
+  width: 160%; /*li의 160% 차지해라*/
   height: 0px;
-  overflow: hidden;
-  /*  부모에 이미 릴레이즈가 있어서 옆으로 옮겨야하니 */
+  overflow: hidden; /*높이를0으로 만들어서 오버플로우로 숨김*/
   position: absolute;
-  left: -50px;
+  left: -56px;
   top: 70px;
-
-  /* box-sizing: border-box; /* 여기 div에 패딩 넣지 않는다 나중에 숨겨지지 않기 떄문에 
-  그래서 li에 넣어줄거임  혹시나 패딩 영역이 나올까봐 넣는거임 일단 주석처리*/
-
+  box-sizing: border-box;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
-  transition: 0.3s;
+  transition: 0.3s; /*스르륵 펼쳐지는 효과 0.3초*/
 }
-
 .submenu {
   box-sizing: border-box;
-  /* 넓이 총 160% */
   width: 100%;
-  padding: 10px 30px;
-  text-align: left;
-  /* 1차 메뉴li 라인하이트가 60이어서 줄여줌 */
-  line-height: 50px;
+  padding: 10px 30px; /*상하 좌우*/
+  text-align: left; /*글자 왼쪽 정렬*/
+  line-height: 50px; /*높이값을 라인하이트로 줄였다.*/
   font-size: 12px;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: uppercase; /*대문자로 변경*/
 }
 .submenu > span {
   color: #707078;
 }
 .submenu > li {
   box-sizing: border-box;
-  padding-left: 40px;
-  /* 혼자 값을 가져라 */
-  position: relative;
+  padding-left: 30px; /*li 앞에 아이콘을 넣어줄 여백을 만들어줬다 아이콘 크기20+여백 20*/
+  position: relative; /*앞에 오는 아이콘들을 정렬하기위해 상대좌표로 변경*/
   border-radius: 8px;
 }
 .submenu > li:hover {
   background-color: #f5f5f5;
 }
-/* a태그 앞에 아이콘 영역 공통설정 */
+/* a태그 앞에 아이콘 영역 공통 설정 */
 .submenu > li > a::before {
-  /* 가상요소는 전부 인라인 속성 그래서 블록 */
-  display: block;
+  display: block; /*가상요소 선택자는 인라인 속성이라 속성 바꿔줘야한다.*/
   width: 20px;
   height: 20px;
-
-  /* 가상요소는 무조건 컨텐츠를 넣어야함 ! */
-  content: "icon";
-  font-size: 0;
-  /*  옮기게 되면 박스가 위로 올라오고 텍스트는 밑으로 내려감 박스 블록 텍스트인라인이니까 ! 그래서 
-  아까 부모에 릴레이지를 넣어줌 여기에 자식 포지션!*/
+  content: ""; /*content를 반드시 넣어줘야한다 안넣으면 안나옴 ''안은 비워둬도 된다. 만약 문구를 쓸 경우 폰트 사이즈를 0으로 선언해줘야한다*/
   position: absolute;
-  top: 15px;
-  /* 박스 안에서도 좀 떨어지게 조정해줌10px */
-  left: 10px;
-  /* 공통적으로 이미지 갖고오기 나중에 클래스 준거에 이름지정따로 하면 됨 */
-  /* 백그라운드는 전체값을 입력해준다 색상(우린 나중에 지워줬음) url 반복여부 */
-  background: url(../img/sprite.svg) no-repeat;
-  /* 불러오면 이미지가 살짝 엇나가있기때문에 조금이라도 중간으로 옮겨줌 */
+  left: 0px;
+  top: 15px; /*좌표값으로 아이콘 위치를 li 옆으로 맞춰준다*/
+  background:/* lightblue*/ url(./../img/sprite.svg) no-repeat; /*한꺼번에 선언 배경컬러, 배경주소, 반복여부 위치맞출때 배경컬러 사용했다.*/
   background-position-x: -5px;
 }
-/* 한개씩 불러오기 */
+/* a안에 클래스 땡땡을 불러와라 */
 .submenu > li > a.jpg::before {
   background-position-y: -180px;
 }
@@ -176,19 +132,7 @@ h1 img {
 .submenu > li > a.htmls::before {
   background-position-y: -530px;
 }
-/* 서브메뉴 안에 li에 호버하면 a가 바껴라  */
-.submenu > li:hover a {
-  color: #bd060a;
-}
-#gnb > ul > li:nth-child(4):hover > div {
-  /* 사이트 크기 320px */
-  height: 320px;
-}
-#gnb > ul > li:last-child:hover > div {
-  height: 370px;
-}
-/* 2번째 차 메뉴 아ㅣ콘 */
-.submenu > li > a.marge::before {
+.submenu > li > a.merge::before {
   background-position-y: -5px;
 }
 .submenu > li > a.split::before {
@@ -200,54 +144,49 @@ h1 img {
 .submenu > li > a.extract::before {
   background-position-y: -80px;
 }
-.submenu > li > a.oranzie::before {
+.submenu > li > a.organize::before {
   background-position-y: -105px;
 }
 .submenu > li > a.scan::before {
   background-position-y: -680px;
 }
-/* 오른쪽 아이콘 버튼들 */
+
+.submenu > li:hover > a {
+  color: #e5322d;
+}
+/* 서브메뉴 펼쳐짐 */
+#gnb > ul > li:nth-child(4):hover > div {
+  height: 320px;
+}
+#gnb > ul > li:last-child:hover > div {
+  height: 370px;
+}
+/* 오른쪽 아이콘 */
 .action {
   width: fit-content;
-  /* 위에 60px만큼 */
   height: 100%;
-  align-items: center;
-
-  /* 부모박스가 플랙스가 적용된 박스에서 
-  만약 해당 요소만 끝으로 옮겨줌 - 마진을 준다!!!!!! */
-  margin-left: auto;
-  /* 브라우저를 올렸을때 밑에 문구가 뜨게 하기 위해서 
-  기준점 잡아주려고 포지션 값 줌 */
-
-  gap: 5px;
+  margin-left: auto; /*margin을 auto로 두면 왼쪽 끝으로 가게된다. 오른쪽으로 가게 하고 싶으면 margin right를 auto로 주면 된다*/
+  column-gap: 5px;
   display: flex;
+  align-items: center;
 }
-/*  */
-/* a태그에 하는 이유가 사용자의 편의를 위해서 한 거임
-그 부분만 클릭하지 않아도 주변만 클릭해도 넘어갈 수 있도록 하기 위해서  */
 .action > a {
-  /* 넓이 높이를 갖게 하려고 블록 바꿈  */
+  position: relative;
   display: block;
   width: 60px;
   height: 100%;
-  /* 브라우저를 올렸을때 밑에 문구가 뜨게 하기 위해서 
-  기준점 잡아주려고 포지션 값 줌 부모박스가 된다고 생각하면 됨 */
-  position: relative;
-  /* 버튼이 있어서 만들어주려면 패딩에 색 넣고 근데 
-  안쪽으로 들어오게 만드렁야해서( a부분도 클릭했을때 넘어가야해서 박스사이징에 패딩값   */
-  box-sizing: border-box;
+  box-sizing: border-box; /*버튼만들때 필요하니깐 미리 선언*/
+  /* background-color: beige; */
 }
-
+/* 각각 불러오기 힘들어서 a로 전체 비포 만들어놓고 가상요소 들어갈 부분만 넓이높이 줘서 보여지게 한다.*/
 .action > a::before {
   content: "";
   display: block;
-  background-image: url(../img/sprite.svg);
+  /* background-color: lightsalmon; */
+  background-image: url(./../img/sprite.svg);
   background-repeat: no-repeat;
-  /* 넓이 높이가 없어서 따로 정해서 해줄거임 그럼 화면에 보임 */
 }
 .action > a.icon_desk {
-  /* 위에 a태그 안에 박스사이징 넣어줬으니까 모니터 아이콘을 가운데로
-    몰려고 여긴 패딩값만 준다 */
   padding: 16px 14px;
 }
 .action > a.icon_desk::before {
@@ -256,157 +195,139 @@ h1 img {
   background-position: -55px -30px;
 }
 .action > a.icon_desk::after {
-  content: "ilovepdf desktop. work offline";
-  display: block;
+  content: "iLovePDF Desktop, work offline";
+  display: block; /*인라인블럭은 보더라디우스를 쓸 수 없다 그래서 블럭으로 바꿈*/
   font-size: 14px;
   width: 230px;
-  min-height: 32px;
-  background-color: #474747;
-  color: #ffffff;
+  line-height: 32px;
+  background-color: #47474f;
+  color: #fff;
   text-align: center;
   font-weight: 700;
   position: absolute;
   top: 70px;
   left: -70px;
   border-radius: 8px;
-  /* 0.3초 동안 오퍼시티를 나타낸다  */
-  opacity: 0;
-  transition: opacity 0.3s;
+  opacity: 0; /*투명도를 없애서 숨겨준다*/
+  transition: opacity 0.3s; /*0.3초동안 오퍼시티를 변화시켜라*/
 }
-/* 오른쪽 메뉴 오퍼시티 */
+/* 띄어쓰기 없이 에프터 불러와야함. 아이콘에 호버하면 뒤에 에프터를 */
 .action > a.icon_desk:hover::after {
   opacity: 1;
 }
 .action > a.login {
   text-align: center;
   line-height: 60px;
-  color: #bd060a;
+  color: #e5322d;
   font-weight: 500;
 }
 .action > a.login:hover {
   color: #47474f;
 }
 .action > a.sign_up {
-  /* 버튼 사이즈를 키워야하니까 보더 박스 해제하고
-  밖으로 생기는 패딩을 만들어줌 */
-  box-sizing: content-box;
+  box-sizing: content-box; /*border-box의 반대.해제 버튼 만들어주기위해서*/
   text-align: center;
-  /* 사이즈조절 */
-  height: 35px;
+  height: 32px;
+  line-height: 30px;
   padding: 0 12px;
-  /* 세로 가운데로 조절 */
-  line-height: 35px;
   font-size: 14px;
   font-weight: 700;
-  background-color: #bd060a;
-  color: #ffffff;
+  background-color: #e5322d;
+  color: #fff;
   border-radius: 10px;
-  /* 트랜지션은 호버 이전의 초기 모습에 주는것이다. */
-  transition: 0.3s;
+  transition: 0.3s; /*hover했을때 천천히 바뀌게 할려면 hover에 이 효과를 주는게 아니라 원래 얘한테 줘야한다*/
 }
 .action > a.sign_up:hover {
   background-color: #47474f;
+}
+.action > a.menu {
+  padding: 21px 18px;
 }
 .action > a.menu::before {
   width: 24px;
   height: 18px;
   background-position: -55px -5px;
 }
-.action > a.menu {
-  padding: 21px 18px;
-}
-/* -------------------------컨텐츠 영역1 */
+/* 컨텐츠 영역 */
 main {
-  margin-top: 60px;
   width: 100%;
-  height: auto;
-  /* 색상 url 반복여부 배경고정여부 위치 /사이즈) */
-  background: #f5f5fa url(../img/background.svg) no-repeat fixed center / cover;
+  height: auto; /*나중에 오버플로우 히든으로 바꿀거다*/
+  /*색상 이미지경로 반복여부 배경고정 위치 / 사이즈 순서*/
+  background: #f5f5fa url(./../img/background.svg) no-repeat fixed center /
+    cover;
+  margin-top: 60px; /*해더크기만큼 내려줘야 컨텐츠 애들이 안숨는다*/
 }
+/* 모든 섹션에 공통 속성 */
 section {
   width: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box; /*섹션들 영역을 패딩으로 잡을려고*/
   height: auto;
 }
+/* 섹션1 */
 .tools {
-  /* 헤더 높이만큼 내려와라 헤더가 고정 되어있으므로
-  그만큼 내용이 숨어서 안 보임 그래서 헤더의 높이만큼 
-  내려와야지 볼 수 있다. */
-  margin-top: 60px;
-  /* 마진만큼 내려주고 패딩은 박스사이징 해줬으니까 메인에서
-  보이는 영역만큼 내려줌 */
-  padding-top: 50px 0;
+  padding: 50px 0;
   text-align: center;
 }
 .top_title {
   width: 100%;
-  margin-bottom: 40px;
-  padding-top: 40px;
+  margin-bottom: 40px; /*밑에 박스들하고 벌려준다*/
 }
 .top_title h2 {
   font-size: 42px;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .top_title p {
-  font-size: 22px;
+  font-size: 20px;
 }
 .tools_wrap {
-  /* 위에 박스사이징을 해놓은 상태이기 때문에 패딩을 주면 안쪽으로 드렁옴 */
   padding: 0 68px;
-  /*  */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 100px;
 }
 .item_con {
   width: 100%;
   height: fit-content;
   display: flex;
   flex-flow: row wrap;
-  /* 사방으로 2px gap */
   gap: 2px;
-  flex: 1 0 16%;
 }
-.item_con > .item {
-  /*!!!!!!! 박스들의 기본 사이즈를 정해주는 속성임 !!!!!! */
-  /* flex-basis: calc(16.666% - 4px);아래와 동일한 효과 */
-  flex: 1 0 16%;
-  background-color: rgb(255, 255, 255);
+.item_con .item {
+  /* flex-basis: calc(16.666% - 4px); gap만큼 빼줌 */
+  flex: 1 0 16%; /*기본적으로 가져야할 넓이를 16%로 설정*/
+  word-wrap: break-word; /*튀어나온거 정렬*/
+  background-color: #fff;
   border: 1px solid #f5f5fa;
   text-align: left;
   border-radius: 4px;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 }
-.item > a {
+/* calc() = 계산기 숫자값을 계산해서 알아서 계산해줌*/
+.item a {
   display: block;
-  /* 마우스를 올렸을때 전체영역이 클릭되어야해서 100에 100 */
   width: 100%;
   height: 100%;
   padding: 50px 30px;
-  /* 깨진 글자 뿌시기 */
-  word-wrap: break-word;
-  /* 패딩이 밖으로 나가면 글자가 깨지기 때문에 안으로 넣어줌 */
   box-sizing: border-box;
 }
-.item > a:hover {
+.item a:hover {
   background-color: #f5f5fa;
 }
 .item h3 {
   font-size: 20px;
   color: #333;
-  font-weight: 700;
+  font-weight: 600;
 }
 .item h3::before {
   content: "icons";
   font-size: 0;
-  /* 인라인 속성이라 기본  속성 변경해서 넓이 높이 값주기 */
   display: block;
   width: 48px;
   height: 48px;
+  /* background-color: lightblue; */
   margin-bottom: 30px;
-  background: url(../img/sprite.svg) no-repeat;
+  background: url(./../img/sprite.svg) no-repeat;
   background-size: 545%;
   background-position: -11px -11px;
 }
@@ -416,18 +337,19 @@ section {
   color: #707078;
   margin-top: 10px;
 }
-/* --------------------------------두번째 섹션 */
+/* 섹션2 */
 .solution {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 100px 0;
   color: #33333b;
   text-align: center;
 }
-section h2 {
+section > h2 {
   font-size: 42px;
   font-weight: 700;
 }
 section > p {
+  /*전체 p 공통속성 선언*/
   line-height: 32px;
   font-size: 22px;
   font-weight: 400;
@@ -452,12 +374,15 @@ section > p {
   line-height: 28px;
   font-weight: 400;
 }
-.solution_box p > a {
+.solution_box a {
   text-decoration: underline;
-  color: #ff1014;
+  color: #e5322d;
   font-weight: 600;
 }
-/* -----------------------세번째 섹션 */
+.solution_box a:hover {
+  color: #47474f;
+}
+/* 섹션3 */
 .user {
   padding: 100px 0;
   text-align: center;
@@ -468,30 +393,25 @@ section > p {
 }
 .other_logo {
   width: 500px;
-
   margin: 0 auto;
   margin-top: 80px;
   display: flex;
   justify-content: space-between;
 }
 .other_logo > div {
-  /* 높이로 맞춰주려고 높이값만 줌 */
   height: 30px;
 }
 .other_logo > div > img {
-  /* 위에 높이값에 맞추기 위해 맥스하이트 - 반응형 하기 좋음 */
-  max-height: 100%;
+  max-height: 100%; /*부모박스의 높이에 맞춰서 채워라*/
 }
-/* ----------------------마지막섹션 */
+/* 섹션4 */
 .premium {
   background-color: #47474f;
   color: #f5f5fa;
   display: flex;
   justify-content: space-between;
-  /* 위에 모든 섹션에 보더박스각 들어와있음 */
   padding: 80px 200px;
-  /* 세로 중앙으로 모아줌 */
-  align-items: center;
+  align-items: center; /*글과 그림 센터로 정렬*/
 }
 .left {
   width: 60%;
@@ -503,26 +423,23 @@ section > p {
 }
 .left p {
   line-height: 32px;
-  font-size: 22px;
+  font-weight: 22px;
   font-weight: 400;
   margin-bottom: 60px;
 }
 .left a {
-  /* a는 인라인이라서 블록속성으로 바꿔야지만 
-  패딩을넣어줄 수 있다. */
   display: block;
   background-color: gold;
-  width: fit-content; /* 현재 들어가있는 글자크기로 맞춰라  */
-  font-weight: 700;
+  width: fit-content;
   padding: 8px 24px;
+  font-weight: 700;
   border-radius: 8px;
-  /* 샤ㅑ라락 */
   transition: 0.3s;
 }
 .left a:hover {
-  background-color: rgb(178, 159, 55);
+  background-color: goldenrod;
 }
-/* 풋터 */
+/* 푸터 */
 footer {
   width: 100%;
   box-sizing: border-box;
@@ -530,60 +447,51 @@ footer {
   background-color: #f5f5fa;
 }
 .sitemap {
-  width: 100%;
-  border-bottom: 1px solid #aaa;
+  width: 100%; /*푸터의 패딩영역을 제외한 나머지 영역을 100%*/
   height: fit-content;
+  border-bottom: 1px solid #aaa;
   margin-bottom: 30px;
 }
-.sitemap #footer_nav {
+#footer_nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  gap: 60px;
+  gap: 60px; /*반응형을 고려하여 갭 넣어놓음*/
 }
-.sitemap #footer_nav ul {
-  /* width: 25%; */
-  /* 이렇게 해줘도 되고, 1000의 ul이 4개니까  */
-  flex-basis: 25%;
+#footer_nav ul {
+  /* flex-basis: 25%;
   flex-grow: 1;
-  flex-shrink: 1;
-  flex: 1 1 25%;
+  flex-shrink: 1; */
+  flex: 1 25%;
   line-height: 1;
   font-weight: 400;
 }
-.sitemap #footer_nav ul h4 {
-  color: #ff1014;
+#footer_nav ul h4 {
+  color: #e5322d;
   font-weight: 700;
   margin-bottom: 16px;
 }
-.sitemap #footer_nav ul li {
-  margin-bottom: 14px;
+#footer_nav ul li {
+  margin-bottom: 14px; /*line-height말고 마진으로 간격을 벌려줬다*/
 }
-
-.sitemap #footer_nav a {
+#footer_nav ul li a {
   color: #707078;
 }
-.sitemap #footer_nav a:hover {
-  color: #ff1014;
+#footer_nav ul li a:hover {
+  color: #e5322d;
 }
 .btn_wrap {
   width: 100%;
-  height: 40px;
+  height: 40px; /*버튼 높이가 40이라서*/
   margin: 30px 0;
-
-  /* 정렬 이거 아님 플롯 사용해도 됨 !  */
 }
-/* a태그는 블록속성이여야지만 마진 패딩을 가질 수 있음
-근데 블록만 넣게 되면 구조가 무너지니 두개 다 갖고 있는 
-인라인 블록 사용 */
 .btn_wrap a {
   float: right;
-  display: inline-block;
+  display: block;
   width: 135px;
   height: 40px;
   margin-left: 10px;
 }
-/* 위에 플롯 써서 뒤에껄 갖고와서 마진 레프트 사용해줌 */
-.btn_wrap a:last-child {
-  margin-left: 0;
+.btn_wrap:first-child {
+  margin-left: 0; /*반응형을 고려해서 없애준다*/
 }
